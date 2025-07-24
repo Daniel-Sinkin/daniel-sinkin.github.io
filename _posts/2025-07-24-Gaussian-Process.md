@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Gaussian Process Notes"
+title: "Sampling with Gaussian Processes"
 ---
 This blog post goes through the details of how to sample a function using Gaussian Process, mostly based on [Rasmussen & Williams (2006)](#rasmussen--williams-2006) and on [Bishop (2006)](#bishop-2006), particularly Chapter 6.1 and 6.4.
 
