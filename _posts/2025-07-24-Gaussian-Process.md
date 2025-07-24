@@ -2,9 +2,6 @@
 layout: post
 title: "Gaussian Process Notes"
 ---
-Is a type of [[Stochastic Process]]
-
-# Example from Lecture
 A Gaussian process is a prior probability distribution over functions, i.e., we sample functions from it. Any finite number of the random variables making up the process have a joint Gaussian distribution.
 
 ## Introduction to Gaussian Process
