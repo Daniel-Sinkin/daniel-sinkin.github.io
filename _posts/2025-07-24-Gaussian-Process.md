@@ -12,20 +12,21 @@ $$
 $$
 and the covariance is given as a covariance function
 $$
-k(x, x') = E[(f(x) - \mu(x))(f(x') - \mu(x')]
+k(x, x') = E[(f(x) - \mu(x))(f(x') - \mu(x'))]
 $$
 We write the function as
 $$
 f(x) \sim \operatorname{GP}(\mu(x), k(x, x'))
 $$
 
-In the lecture we learned about the squared exponential (se) covariance function
+One common kernel is the squared exponential (se) kernel
+
 $$
-k(x, x') = \exp\left(-\frac{1}{2} |x - x'|^2\right).
+k_\ell(x, x') = \exp\left(-\frac{1}{2} \left(\frac{|x - x'|}{\ell}\right)^2\right).
 $$
 ```python
-def kernel(x, xp):
-	return np.exp(-0.5 * (x - xp) ** 2)
+def kernel(x, xp, ell: float = 1.0):
+	return np.exp(-0.5 * ((x - xp)/ell) ** 2)
 ```
 ## Experimental Setup
 We start with our training data
@@ -109,6 +110,7 @@ K_SS = get_covariance_from_kernel(xs, xs)
 assert K_SS.shape == (ns, ns)
 ```
 This gives us a total covariance matrix given by
+
 $$
 K := 
 \begin{pmatrix}
