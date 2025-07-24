@@ -141,7 +141,7 @@ K :=
 \begin{pmatrix}
 K(X, X) & K(X, X_*) \\
 K(X_*, X) & K(X_*, X_*)
-\end{pmatrix}.
+\end{pmatrix} \in \mathbb{R}^{(n + N)\times(n + N)}.
 $$
 
 ```python
