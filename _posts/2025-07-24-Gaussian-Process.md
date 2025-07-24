@@ -232,11 +232,11 @@ A more efficient implementation of the kernel, using broadcasting
 ```python
 def get_covariance_from_kernel(X: np.ndarray, Y: np.ndarray) -> np.ndarray:
     X = X[:, np.newaxis]
-	assert shape(X) == (len(X), 1)
+	assert X.shape == (len(X), 1)
     Y = Y[np.newaxis, :]
-	assert shape(Y) == (1, len(Y))
+	assert Y.shape == (1, len(Y))
     sq_dist = (X - Y) ** 2
-	assert shape(sq_dist) == (len(X), len(Y))
+	assert sq_dist.shape == (len(X), len(Y))
     return np.exp(-0.5 * sq_dist)
 ```
 # References
