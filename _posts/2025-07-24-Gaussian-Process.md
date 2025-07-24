@@ -2,7 +2,7 @@
 layout: post
 title: "Sampling with Gaussian Processes"
 ---
-This blog post goes through the details of how to sample a function using Gaussian Process, mostly based on [Rasmussen & Williams (2006)](#rasmussen--williams-2006) and on [Bishop (2006)](#bishop-2006), particularly Chapter 6.1 and 6.4.
+This blog post goes through the details of how to sample a function using Gaussian Process, mostly based on [Rasmussen & Williams (2006)](#rasmussen--williams-2006) Chapter 2 and on [Bishop (2006)](#bishop-2006), particularly Chapter 6.1 and 6.4.
 
 A Gaussian process is a prior probability distribution over functions, i.e., we sample functions from it. Any finite number of the random variables making up the process have a joint Gaussian distribution.
 ### Introduction to Gaussian Process
