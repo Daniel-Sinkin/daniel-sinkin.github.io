@@ -113,7 +113,7 @@ There are two more covariances, given by the interaction of the training and tes
 
 $$
 \begin{aligned}
-K(X, X_*) \in \mathbb{R}^{n \times N},&& K(X_*, X) = K(X, X_*) \in \mathbb{R}^{N \times n}
+K(X, X_*) \in \mathbb{R}^{n \times N},&& K(X_*, X) = K(X, X_*)^\top \in \mathbb{R}^{N \times n}
 \end{aligned}
 $$
 
