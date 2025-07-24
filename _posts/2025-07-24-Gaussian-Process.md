@@ -218,14 +218,26 @@ sample_functions = rng.multivariate_normal(mu, cov, 3)
 # Plots
 ![GP Posterior Sample](/assets/img/gaussian_process.png)
 # Technical Details and Performance
+## Numerical Stability
 Even when we don't assume any measurement noises it is prudent to add a slight diagonal offset to the top left and bottom right covariance matrix to improve numerical stability and matrix condition
 ```python
 K_XX = get_covariance_from_kernel(x_train, x_train) + 1e-6 * np.eye(n_train)
 K_SS = get_covariance_from_kernel(xs, xs) + 1e-6 * np.eye(ns)
 ```
-Matrices should never be explicitly inverted (e.g. with `np.linalg.inv`) — instead, using the
-Cholesky decomposition is both significantly faster and more memory efficient. For a
-numerically stable implementation, see [Rasmussen & Williams (2006)](#rasmussen--williams-2006), §5.5 Model Selection for GP Classification.
+## Matrix Inversion
+Matrices should never be explicitly inverted (e.g. with `np.linalg.inv`) — instead, using the Cholesky decomposition is both significantly faster and more memory efficient. For a numerically stable implementation, see [Rasmussen & Williams (2006)](#rasmussen--williams-2006), §5.5 Model Selection for GP Classification.
+## Broadcasting for Kernel Application
+A more efficient implementation of the kernel, using broadcasting
+```python
+def get_covariance_from_kernel(X: np.ndarray, Y: np.ndarray) -> np.ndarray:
+    X = X[:, np.newaxis]
+	assert shape(X) == (len(X), 1)
+    Y = Y[np.newaxis, :]
+	assert shape(Y) == (1, len(Y))
+    sq_dist = (X - Y) ** 2
+	assert shape(sq_dist) == (len(X), len(Y))
+    return np.exp(-0.5 * sq_dist)
+```
 # References
 - <a name="rasmussen--williams-2006"></a>Rasmussen, C.E. & Williams, C.K.I. (2006). *Gaussian Processes for Machine Learning*. MIT Press. [Online version](https://gaussianprocess.org/gpml/)
 - <a name="bishop-2006"></a>Bishop, C.M. (2006). *Pattern Recognition and Machine Learning*. Springer. Relevant sections: Chapter 6.1 (Gaussian Processes) and 6.4 (Bayesian Linear Regression).
