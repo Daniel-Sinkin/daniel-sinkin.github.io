@@ -226,7 +226,7 @@ K_XX = get_covariance_from_kernel(x_train, x_train) + 1e-6 * np.eye(n_train)
 K_SS = get_covariance_from_kernel(xs, xs) + 1e-6 * np.eye(ns)
 ```
 # Matrix Inversion
-Matrices should never be explicitly inverted (e.g. with `np.linalg.inv`) — instead, using the Cholesky decomposition is both significantly faster and more memory efficient. For a numerically stable implementation, see [Rasmussen & Williams (2006)](#rasmussen--williams-2006), §5.5 Model Selection for GP Classification.
+Matrices should never be explicitly inverted (e.g. with `np.linalg.inv`) — instead, using the Cholesky decomposition is both significantly faster and more memory efficient. For a numerically stable implementation, see [Rasmussen & Williams (2006)](#rasmussen--williams-2006), §2.2 Function space view.
 # Broadcasting for Kernel Application
 A more efficient implementation of the kernel, using broadcasting
 ```python
