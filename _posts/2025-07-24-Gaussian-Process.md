@@ -5,7 +5,7 @@ title: "Sampling with Gaussian Processes"
 This blog post goes through the details of how to sample a function using Gaussian Process, mostly based on [Rasmussen & Williams (2006)](#rasmussen--williams-2006) and on [Bishop (2006)](#bishop-2006), particularly Chapter 6.1 and 6.4.
 
 A Gaussian process is a prior probability distribution over functions, i.e., we sample functions from it. Any finite number of the random variables making up the process have a joint Gaussian distribution.
-## Introduction to Gaussian Process
+### Introduction to Gaussian Process
 The mean is a function
 
 $$
@@ -34,7 +34,7 @@ $$
 def kernel(x, xp, ell: float = 1.0):
 	return np.exp(-0.5 * ((x - xp)/ell) ** 2)
 ```
-## Experimental Setup
+### Experimental Setup
 We start with our training data
 
 $$
@@ -70,7 +70,7 @@ xs = np.linspace(x_start, x_end, n_test_points)
 # Want to know ys ~ func(xs)
 ns = len(xs)
 ```
-## Covariance Matrices
+### Covariance Matrices
 ```python
 def get_covariance_from_kernel(X: np.ndarray, Y: np.ndarray) -> np.ndarray:
 	n_X = len(X)
@@ -166,7 +166,7 @@ K(X_*, X) & K(X_*, X_*)
 \end{aligned}
 $$
 
-## Calculating the Posterior
+### Calculating the Posterior
 We know all the training points (\(X\)), the testing points (\(X_*\)) and the training outputs (\(F\)). Recall that any given sample in the Gaussian process is already defined by its mean
 
 $$
@@ -215,18 +215,18 @@ rng = np.random.default_rng(0)
 sample_functions = rng.multivariate_normal(mu, cov, 3)
 ```
 
-# Plots
+### Plots
 ![GP Posterior Sample](/assets/img/gaussian_process.png)
-# Technical Details and Performance
-## Numerical Stability
+### Technical Details and Performance
+# Numerical Stability
 Even when we don't assume any measurement noises it is prudent to add a slight diagonal offset to the top left and bottom right covariance matrix to improve numerical stability and matrix condition
 ```python
 K_XX = get_covariance_from_kernel(x_train, x_train) + 1e-6 * np.eye(n_train)
 K_SS = get_covariance_from_kernel(xs, xs) + 1e-6 * np.eye(ns)
 ```
-## Matrix Inversion
+# Matrix Inversion
 Matrices should never be explicitly inverted (e.g. with `np.linalg.inv`) — instead, using the Cholesky decomposition is both significantly faster and more memory efficient. For a numerically stable implementation, see [Rasmussen & Williams (2006)](#rasmussen--williams-2006), §5.5 Model Selection for GP Classification.
-## Broadcasting for Kernel Application
+# Broadcasting for Kernel Application
 A more efficient implementation of the kernel, using broadcasting
 ```python
 def get_covariance_from_kernel(X: np.ndarray, Y: np.ndarray) -> np.ndarray:
