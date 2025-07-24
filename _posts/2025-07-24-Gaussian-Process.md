@@ -218,6 +218,7 @@ sample_functions = rng.multivariate_normal(mu, cov, 3)
 ### Plots
 ![GP Posterior Sample](/assets/img/gaussian_process.png)
 ### Technical Details and Performance
+Full implementation can be found [here](https://github.com/Daniel-Sinkin/DeepLearning/blob/main/visualisations/gaussian_process.py).
 # Numerical Stability
 Even when we don't assume any measurement noises it is prudent to add a slight diagonal offset to the top left and bottom right covariance matrix to improve numerical stability and matrix condition
 ```python
@@ -242,3 +243,4 @@ def get_covariance_from_kernel(X: np.ndarray, Y: np.ndarray) -> np.ndarray:
 - <a name="rasmussen--williams-2006"></a>Rasmussen, C.E. & Williams, C.K.I. (2006). *Gaussian Processes for Machine Learning*. MIT Press. [Online version](https://gaussianprocess.org/gpml/)
 - <a name="bishop-2006"></a>Bishop, C.M. (2006). *Pattern Recognition and Machine Learning*. Springer. Relevant sections: Chapter 6.1 (Gaussian Processes) and 6.4 (Bayesian Linear Regression).
 - [Wikipedia – Gaussian Process](https://en.wikipedia.org/wiki/Gaussian_process)
+- https://github.com/Daniel-Sinkin/DeepLearning/blob/main/visualisations/gaussian_process.py
