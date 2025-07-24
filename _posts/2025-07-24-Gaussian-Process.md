@@ -41,7 +41,7 @@ $$
 ((x_1, f_1), (x_2, f_2), \dots, (x_n, f_n)),
 $$
 
-we call \(X = (x_1, x_2, \dots, x_n)\) the training points and \(F = (f_1, f_2, \dots, f_n) \in \mathbb{R^n}\) the training outputs.
+we call $$X = (x_1, x_2, \dots, x_n)$$ the training points and $$F = (f_1, f_2, \dots, f_n) \in \mathbb{R^n}$$ the training outputs.
 
 We assume that we know these values exactly, and want to then predict the function value on our test points
 
@@ -168,7 +168,7 @@ K(X_*, X) & K(X_*, X_*)
 $$
 
 ### Calculating the Posterior
-We know all the training points (\(X\)), the testing points (\(X_*\)) and the training outputs (\(F\)). Recall that any given sample in the Gaussian process is already defined by its mean
+We know all the training points ($$X$$), the testing points ($$X_*$$) and the training outputs ($$F$$). Recall that any given sample in the Gaussian process is already defined by its mean
 
 $$
 \overline{F_*} = E[F_* | X, X_*, F],
@@ -196,7 +196,7 @@ K(X_*, X) \in \mathbb{R}^{N \times n},&&K(X, X)^{-1} \in \mathbb{R}^{n \times n}
 \end{aligned}
 $$
 
-which means the RHS is \(\mathbb{R}^{N}\) which aligns with \(F_* \in \mathbb{R}^N\).
+which means the RHS is $$\mathbb{R}^{N}$$ which aligns with $$F_* \in \mathbb{R}^N$$.
 
 Next we compute the covariance
 
@@ -209,7 +209,7 @@ mu  = K_SX @ K_XX_inv @ y_train
 cov = K_SS - K_SX @ K_XX_inv @ K_SX.T
 ```
 
-With that we are already able to sample our approximate \(F_*\) as a multivariate normal distribution, we get \(N\) points which correspond exactly to our test points.
+With that we are already able to sample our approximate $$F_*$$ as a multivariate normal distribution, we get $$N$$ points which correspond exactly to our test points.
 
 ```python
 rng = np.random.default_rng(0)
