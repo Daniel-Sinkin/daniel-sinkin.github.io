@@ -86,6 +86,7 @@ The matrix
 $$
 K(X_, X) \in \mathbb{R}^{n \times n}
 $$
+
 is the covariance matrix of our training points, defined by
 
 $$
