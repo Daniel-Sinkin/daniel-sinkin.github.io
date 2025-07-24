@@ -2,8 +2,9 @@
 layout: post
 title: "Gaussian Process Notes"
 ---
-A Gaussian process is a prior probability distribution over functions, i.e., we sample functions from it. Any finite number of the random variables making up the process have a joint Gaussian distribution.
+This blog post goes through the details of how to sample a function using Gaussian Process, mostly based on [Rasmussen & Williams (2006)](#rasmussen--williams-2006).
 
+A Gaussian process is a prior probability distribution over functions, i.e., we sample functions from it. Any finite number of the random variables making up the process have a joint Gaussian distribution.
 ## Introduction to Gaussian Process
 The mean is a function
 $$
