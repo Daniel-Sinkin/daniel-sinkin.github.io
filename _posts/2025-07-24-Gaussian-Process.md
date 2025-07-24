@@ -22,7 +22,7 @@ $$
 One common kernel is the squared exponential (se) kernel
 
 $$
-k_\ell(x, x') = \exp\left(-\frac{1}{2} \left(\frac{|x - x'|}{\ell}\right)^2\right).
+k_\ell(x, x') = \exp\left(-\frac{1}{2} \left(\frac{||x - x'||}{\ell}\right)^2\right).
 $$
 ```python
 def kernel(x, xp, ell: float = 1.0):
@@ -30,6 +30,7 @@ def kernel(x, xp, ell: float = 1.0):
 ```
 ## Experimental Setup
 We start with our training data
+
 $$
 ((x_1, f_1), (x_2, f_2), \dots, (x_n, f_n)),
 $$
@@ -68,32 +69,38 @@ def get_covariance_from_kernel(X: np.ndarray, Y: np.ndarray) -> np.ndarray:
 	return K
 ```
 The matrix
+
 $$
 K(X_, X) \in \mathbb{R}^{n \times n}
 $$
 is the covariance matrix of our training points, defined by
+
 $$
 \begin{aligned}
 K(X, X)_{i, j} := k(x_i, x_j),&&1 \leq i, j \leq n,
 \end{aligned}
 $$
 similarly we have the covariance matrix of the test points
+
 $$
 K(X_*, X_*) \in \mathbb{R}^{N \times N}
 $$
 defined by
+
 $$
 \begin{aligned}
 K(X_*, X_*)_{I, J} := k(x^*_I, x^*_J),&&1 \leq I, J\leq N,
 \end{aligned}
 $$
 There are two more covariances, given by the interaction of the training and test points:
+
 $$
 \begin{aligned}
 K(X, X_*) \in \mathbb{R}^{n \times N},&& K(X_*, X) = K(X, X_*) \in \mathbb{R}^{N \times n}
 \end{aligned}
 $$
 defined by
+
 $$
 \begin{aligned}
 K(X, X_*)_{i, J} := k(x_i, x_J^*),&&1\leq i \leq n, 1 \leq J \leq N.
