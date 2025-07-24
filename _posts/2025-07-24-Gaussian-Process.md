@@ -2,7 +2,7 @@
 layout: post
 title: "Gaussian Process Notes"
 ---
-This blog post goes through the details of how to sample a function using Gaussian Process, mostly based on [Rasmussen & Williams (2006)](#rasmussen--williams-2006).
+This blog post goes through the details of how to sample a function using Gaussian Process, mostly based on [Rasmussen & Williams (2006)](#rasmussen--williams-2006) and on [Bishop (2006)](#bishop-2006), particularly Chapter 6.1 and 6.4.
 
 A Gaussian process is a prior probability distribution over functions, i.e., we sample functions from it. Any finite number of the random variables making up the process have a joint Gaussian distribution.
 ## Introduction to Gaussian Process
@@ -126,6 +126,7 @@ assert np.allclose(K[n_train:n_train + ns, :n_train], K_SX)
 assert np.allclose(K[n_train:n_train + ns, n_train:n_train + ns], K_SS)
 ```
 By definition of Gaussian Process we have
+
 $$
 \begin{aligned}
 F &\sim \mathcal{N}(0, K(X, X)), \\
@@ -186,4 +187,5 @@ Cholesky decomposition is both significantly faster and more memory efficient. F
 numerically stable implementation, see [Rasmussen & Williams (2006)](#rasmussen--williams-2006), §5.5 Model Selection for GP Classification.
 # References
 - <a name="rasmussen--williams-2006"></a>Rasmussen, C.E. & Williams, C.K.I. (2006). *Gaussian Processes for Machine Learning*. MIT Press. [Online version](https://gaussianprocess.org/gpml/)
+- <a name="bishop-2006"></a>Bishop, C.M. (2006). *Pattern Recognition and Machine Learning*. Springer. Relevant sections: Chapter 6.1 (Gaussian Processes) and 6.4 (Bayesian Linear Regression).
 - [Wikipedia – Gaussian Process](https://en.wikipedia.org/wiki/Gaussian_process)
