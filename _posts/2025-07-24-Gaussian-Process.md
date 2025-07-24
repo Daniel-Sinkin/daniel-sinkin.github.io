@@ -7,14 +7,19 @@ This blog post goes through the details of how to sample a function using Gaussi
 A Gaussian process is a prior probability distribution over functions, i.e., we sample functions from it. Any finite number of the random variables making up the process have a joint Gaussian distribution.
 ## Introduction to Gaussian Process
 The mean is a function
+
 $$
 \mu(x) = E[f(x)]
 $$
+
 and the covariance is given as a covariance function
+
 $$
 k(x, x') = E[(f(x) - \mu(x))(f(x') - \mu(x'))]
 $$
+
 We write the function as
+
 $$
 f(x) \sim \operatorname{GP}(\mu(x), k(x, x'))
 $$
@@ -24,6 +29,7 @@ One common kernel is the squared exponential (se) kernel
 $$
 k_\ell(x, x') = \exp\left(-\frac{1}{2} \left(\frac{||x - x'||}{\ell}\right)^2\right).
 $$
+
 ```python
 def kernel(x, xp, ell: float = 1.0):
 	return np.exp(-0.5 * ((x - xp)/ell) ** 2)
@@ -34,20 +40,27 @@ We start with our training data
 $$
 ((x_1, f_1), (x_2, f_2), \dots, (x_n, f_n)),
 $$
+
 we call $X = (x_1, x_2, \dots, x_n)$ the training points and $F = (f_1, f_2, \dots, f_n) \in \mathbb{R^n}$ the training outputs.
 
 We assume that we know these values exactly, and want to then predict the function value on our test points
+
 $$
 X_* = (x_1^*, x_2^*, \dots, x_N^*),
 $$
+
 the corresponding values are called test outputs are denoted by
+
 $$
 F_* = (f_1^*, f_2^*, \dots, f_N^*),
 $$
+
 and the goal is to determine these such that
+
 $$
 \forall 1 \leq I \leq N : f_I^* \approx f(x_I^*) 
 $$
+
 ```python
 x_train = ... # Samples
 y_train = ... # Samples, y_train = func(xs)
@@ -80,11 +93,13 @@ $$
 K(X, X)_{i, j} := k(x_i, x_j),&&1 \leq i, j \leq n,
 \end{aligned}
 $$
+
 similarly we have the covariance matrix of the test points
 
 $$
 K(X_*, X_*) \in \mathbb{R}^{N \times N}
 $$
+
 defined by
 
 $$
@@ -92,6 +107,7 @@ $$
 K(X_*, X_*)_{I, J} := k(x^*_I, x^*_J),&&1 \leq I, J\leq N,
 \end{aligned}
 $$
+
 There are two more covariances, given by the interaction of the training and test points:
 
 $$
@@ -99,6 +115,7 @@ $$
 K(X, X_*) \in \mathbb{R}^{n \times N},&& K(X_*, X) = K(X, X_*) \in \mathbb{R}^{N \times n}
 \end{aligned}
 $$
+
 defined by
 
 $$
@@ -106,6 +123,7 @@ $$
 K(X, X_*)_{i, J} := k(x_i, x_J^*),&&1\leq i \leq n, 1 \leq J \leq N.
 \end{aligned}
 $$
+
 ```python
 K_XX = get_covariance_from_kernel(x_train, x_train)
 assert K_XX.shape == (n_train, n_train)
@@ -125,6 +143,7 @@ K(X, X) & K(X, X_*) \\
 K(X_*, X) & K(X_*, X_*)
 \end{pmatrix}.
 $$
+
 ```python
 x_combined = np.concatenate([x_train, xs])
 K = get_covariance_from_kernel(x_combined, x_combined)
@@ -149,40 +168,53 @@ $$
 
 ## Calculating the Posterior
 We know all the training points ($X$), the testing points ($X_*$) and the training outputs ($F$). Recall that any given sample in the Gaussian process is already defined by its mean
+
 $$
 \overline{F_*} = E[F_* | X, X_*, F],
 $$
+
 and its covariance
+
 $$
 F_* | X_*, X, F \sim \mathcal{N}(\overline{F_*}, \operatorname{cov}[F_*]).
 $$
+
 We can compute these quantities by using the block matrix property of Gaussian matrices.
 
 First we compute the conditional expectation as
+
 $$
 \overline{F_*} = K(X_*, X)K(X, X)^{-1} F,
 $$
+
 noting that
+
 $$
 \begin{aligned}
 K(X_*, X) \in \mathbb{R}^{N \times n},&&K(X, X)^{-1} \in \mathbb{R}^{n \times n}, &&F \in \mathbb{R}^n
 \end{aligned}
 $$
+
 which means the RHS is $\mathbb{R}^{N}$ which aligns with $F_* \in \mathbb{R}^N$.
 
 Next we compute the covariance
+
 $$
 \operatorname{cov}[F_*] = K(X_*, X_*) - K(X_*, X)K(X, X)^{-1}K(X, X_*).
 $$
+
 ```python
 mu  = K_SX @ K_XX_inv @ y_train
 cov = K_SS - K_SX @ K_XX_inv @ K_SX.T
 ```
+
 With that we are already able to sample our approximate $F_*$ as a multivariate normal distribution, we get $N$ points which correspond exactly to our test points.
+
 ```python
 rng = np.random.default_rng(0)
 sample_functions = rng.multivariate_normal(mu, cov, 3)
 ```
+
 # Plots
 ![GP Posterior Sample](/assets/img/gaussian_process.png)
 # Technical Details and Performance
