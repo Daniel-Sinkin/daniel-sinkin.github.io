@@ -4,6 +4,19 @@ title: "Pattern Recognition and Machine Learning - Visualisations"
 ---
 Visualisations of different parts of the PRML book [Pattern Recognition and Machine Learning](https://www.springer.com/gp/book/9780387310732) by Christopher M. Bishop (2006).
 
+# Table of Contents
+- [Rejection Sampling](#rejection-sampling)
+- [Ridge Regression](#ridge-regression)
+- [Curve Fitting](#curve-fitting)
+- [PCA](#pca)
+- [Effect of Regularisation](#effect-of-regularisation)
+- [Box Muller](#box-muller)
+- [Integral Density](#integral-density)
+- [Gaussian Process](#gaussian-process)
+  - [Contribution Histograms](#contribution-histograms)
+  - [Heatmap of different Kernels](#heatmap-of-different-kernels)
+- [References](#references)
+
 ## Rejection Sampling
 Suppose we want to sample a complex distribution $$p(z)$$ what is easy to evaluate if we ignore
 normalisation, i.e., such that $$\tilde{p}(z) = C p(z)$$
