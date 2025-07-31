@@ -56,11 +56,11 @@ and checking if $$ u \leq A(z_t, z_t + \delta) $$ (which of course is always the
 
 If we accept, we define $$ z_{t + 1} = z_t + \delta $$; otherwise, we simply remain at the same position, i.e., $$ z_{t + 1} = z_t $$.
 
-<p align="center">
+<p align="left">
   <img src="/assets/img/mcmc/mcmc_elongated_gaussian_path.png" width="45%" />
   <img src="/assets/img/mcmc/mcmc_elongated_gaussian_heatmap.png" width="45%" />
 </p>
-<p align="center">
+<p align="left">
   <img src="/assets/img/mcmc/mcmc_mixture_of_gaussians_path.png" width="45%" />
   <img src="/assets/img/mcmc/mcmc_mixture_of_gaussians_heatmap.png" width="45%" />
 </p>
