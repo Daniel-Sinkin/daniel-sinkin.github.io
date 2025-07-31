@@ -4,7 +4,7 @@ title: "Pattern Recognition and Machine Learning - Visualisations"
 ---
 Visualisations of different parts of the PRML book [Pattern Recognition and Machine Learning](https://www.springer.com/gp/book/9780387310732) by Christopher M. Bishop (2006).
 
-The code can be found at https://github.com/Daniel-Sinkin/Deeplearning
+The code can be found at https://github.com/Daniel-Sinkin/Deeplearning/
 
 # Table of Contents
 - [Markov Chain Monte Carlo](#markov-chain-monte-carlo)
