@@ -7,6 +7,7 @@ Visualisations of different parts of the PRML book [Pattern Recognition and Mach
 The code can be found at https://github.com/Daniel-Sinkin/Deeplearning/
 
 # Table of Contents
+- [EM Algo](#em-algo)
 - [Markov Chain Monte Carlo](#markov-chain-monte-carlo)
 - [Rejection Sampling](#rejection-sampling)
 - [Ridge Regression](#ridge-regression)
@@ -19,6 +20,12 @@ The code can be found at https://github.com/Daniel-Sinkin/Deeplearning/
   - [Contribution Histograms](#contribution-histograms)
   - [Heatmap of different Kernels](#heatmap-of-different-kernels)
 - [References](#references)
+
+## EM Algo
+<p align="center">
+  <img src="/assets/img/em_algo.png" width="75%" />
+</p>
+
 
 ## Markov Chain Monte Carlo
 
